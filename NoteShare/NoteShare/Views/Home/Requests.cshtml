@@ -1,0 +1,61 @@
+﻿
+@model IEnumerable<UserRequest>
+@{
+    ViewData["Title"] = "Requests";
+}
+<style>
+    h2 {
+        color: deepskyblue;
+    }
+
+    h5 {
+        color: dodgerblue;
+        font-style: italic;
+    }
+    h6 {
+        color: dodgerblue;
+        font-style: oblique;
+    }
+</style>
+
+<h2>Kérések listája</h2>
+<h6>
+    Itt láthatod ki szeretne csatlakozni a csoportodhoz.
+    </h6>
+<br\>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <h5>
+                        Csoport neve
+                    </h5>
+                </th>
+                <th>
+                    <h5>
+                        Felhasználó
+                    </h5>
+                </th>
+                <th>
+
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Groupname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.ActionLink("Felhasználó hozzáadása a csoporthoz", "AddUserToGroup", new { usid = item.UserId, grid = item.GroupId })
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>

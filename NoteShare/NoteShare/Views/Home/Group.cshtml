@@ -1,0 +1,70 @@
+﻿@model IEnumerable<NoteShare.Models.Group>
+
+<style>
+    h2 {
+        color: deepskyblue;
+    }
+
+    h5 {
+        color: dodgerblue;
+        font-style: italic;
+    }
+</style>
+<h2>Csoportok, amikhez hozzáféréssel rendelkezel</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <h5>Csoport neve</h5>
+            </th>
+            <th>
+                <h5>Csoport tulajdonosa</h5>
+            </th>
+            <th>
+                <h5>Leírás</h5>
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GroupName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GroupOwner)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+                <td>
+                    @{ 
+                        if (item.GroupOwnerId == ViewBag.UserId)
+                        {
+                    @Html.ActionLink("Bejegyzések", "Posts", new { id = item.GroupId, owner = true })
+                        }
+                        else
+                        {
+                    @Html.ActionLink("Bejegyzések", "Posts", new { id = item.GroupId, owner = false })
+                            }
+                        }
+                </td>
+                <td>
+
+                    @Html.ActionLink("Új bejegyzés", "AddPost", new { id = item.GroupId })
+                </td>
+                <td>
+                    @{
+                        if (item.GroupOwnerId == ViewBag.UserId)
+                        {
+                            @Html.ActionLink("Új tag felvétele", "UsersList", new { id = item.GroupId })
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

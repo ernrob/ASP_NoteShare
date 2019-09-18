@@ -1,0 +1,56 @@
+﻿@model IEnumerable<NoteShare.Models.Group>
+
+@{
+    ViewData["Title"] = "AllGroups";
+}
+<style>
+    h2{
+        color:deepskyblue;        
+    }
+    h5{
+        color:dodgerblue;
+        font-style:italic;
+    }
+</style>
+<h2>Az összes csoport listája</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <h5> Csoport neve</h5>
+            </th>
+            <th>
+                <h5> Csoport tulajdonosa</h5>
+            </th>
+            <th>
+                <h5>Leírás</h5>
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GroupName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GroupOwner)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+                <td>
+                    @{
+                        if (item.GroupOwnerId != ViewBag.UserId)
+                        {
+                            @Html.ActionLink("Csatlakozási kérelem küldése", "UserRequest", new { id = item.GroupId, uid=ViewBag.UserId, groupname = item.GroupName,uname=ViewBag.Name})
+                        }
+                        }
+                </td>  
+            </tr>
+        }
+    </tbody>
+</table>

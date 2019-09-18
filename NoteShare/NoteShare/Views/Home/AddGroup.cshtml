@@ -1,0 +1,46 @@
+﻿@model NoteShare.Models.Group
+
+@{
+    ViewData["Title"] = "AddGroup";
+}
+<style>
+    h2 {
+        color: deepskyblue;
+    }
+
+    h5 {
+        color: dodgerblue;
+        font-style: italic;
+    }
+</style>
+<h2>Új csoport hozzáadása</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddGroup">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="GroupName" class="control-label" >Csoport neve</label>
+                <input asp-for="GroupName" class="form-control" />
+                <span asp-validation-for="GroupName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Text" class="control-label">Rövid leírás a csoportról</label>
+                <input asp-for="Text" class="form-control" />
+                <span asp-validation-for="Text" class="text-danger"></span>
+            </div>
+
+
+            
+            <div class="form-group">
+                <input type="submit" value="Létrehozás" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Group">Vissza a csoportokhoz</a>
+</div>
+

@@ -1,0 +1,49 @@
+﻿@model NoteShare.Models.Post
+
+
+@{
+    ViewData["Title"] = "AddPost";
+}
+
+<style>
+    h2 {
+        color: deepskyblue;
+    }
+
+    h5 {
+        color: dodgerblue;
+        font-style: italic;
+    }
+</style>
+<h2>Új bejegyzés hozzáadása</h2>
+</br>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddPost" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PostName" class="control-label">Bejegyzés címe</label>
+                <input asp-for="PostName" class="form-control" />
+                <span asp-validation-for="PostName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Text" class="control-label">Szöveg</label>
+                <input asp-for="Text" class="form-control" />
+                <span asp-validation-for="Text" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="GroupId" value="@ViewBag.Groupid"/>
+
+            <div class="form-group">
+                <label asp-for="FileUpload" class="control-label">Fájl feltöltése</label>
+                <input type="file" asp-for="FileUpload" class="form-control" name="FileUpload" />
+                <span asp-validation-for="FileUpload" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Közzététel" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+

@@ -1,0 +1,75 @@
+﻿@model IEnumerable<NoteShare.Models.Post>
+
+@{
+    ViewData["Title"] = "Posts";
+}
+<style>
+    h2 {
+        color: deepskyblue;
+    }
+
+    h3 {
+        color: deepskyblue;
+        text-align: center;
+    }
+
+    h5 {
+        font-size:medium;
+        color: royalblue;
+        font-style: italic;
+    }
+</style>
+<h2>Bejegyzések a csoportban</h2>
+</br>
+</br>
+<p>
+    <h3 class="well">
+        @Html.ActionLink("Új bejegyzés", "AddPost", new { id = ViewBag.Grouid })
+    </h3>
+</p>
+
+</br>
+
+<div class="panel-group">
+    @foreach (var item in Model)
+    { <br/>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h5>
+                    @Html.DisplayFor(modelItem => item.PostName)
+                </h5>
+            </div>
+            <div class="panel-body">
+                <div class="well">
+                    @Html.DisplayFor(modelItem => item.Text)
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        @{
+                            if (item.File != null)
+                            {
+                                @Html.ActionLink("Csatolmány megnyitása", "DonwloadFile", new { id = item.PostId })
+                            }
+                        }
+                    </div>
+                    <div class="col-lg-4">
+                        @{
+                            if (ViewBag.Owner)
+                            {
+                                @Html.ActionLink("Bejegyzés törlése", "DeletePost", new { id = item.PostId, gid = ViewBag.Groupid })
+                            }
+                        }
+                    </div>
+
+                    <div class="col-lg-4" style="color:black;">
+                        <h6>
+                            Létrehozva  @Html.DisplayFor(modelItem => item.PostCreator) által, @Html.DisplayFor(modelItem => item.CreationDate)
+                        </h6>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
+  

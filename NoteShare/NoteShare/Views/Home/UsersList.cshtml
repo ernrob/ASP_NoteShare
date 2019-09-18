@@ -1,0 +1,48 @@
+﻿
+@model Dictionary<string,string>
+@{
+    ViewData["Title"] = "UsersList";
+    
+}
+<style>
+    h2 {
+        color: deepskyblue;
+    }
+
+    h5 {
+        color: dodgerblue;
+        font-style: italic;
+    }
+</style>
+<h2>Felhasználók listája</h2>
+<br\>
+    <table class="table">
+        <thead>
+            <tr>
+                
+                <th>
+                    <h5>
+                        Felhasználónév
+                    </h5> 
+                </th>
+                <th>
+                    
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value)
+                    </td>                    
+                    
+                    <td>    
+                        @Html.ActionLink("Hozzáadás a csoporthoz", "AddUserToGroup", new { usid = item.Key, grid=ViewBag.Groupid})
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
